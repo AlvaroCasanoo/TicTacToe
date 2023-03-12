@@ -1,40 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-.tablero{
-display: flex;
-flex-wrap: wrap;
-border: 1px solid black;
-gap: 5px;
-height:  620px;
-width: 628px;
-}
+        html {
+            height: 100vh;
+        }
 
-.casilla{
-    border: 1px solid black;
-    height: 200px;
-    width: 200px;
+        body {
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(301deg, rgb(14 13 11), rgb(68 58 46), rgb(195 181 160), rgb(204 128 27) 70.71%);
+            background-size: 400% 300%;
+            animation: BgGradient 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @keyframes BgGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+        .tablero {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            height: 70vh;
+            width: 30vw;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: center;
+        }
+
+
+        .casilla {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            height: 96px;
+            width: 97px;
+            font-size: 100px;
+            background: linear-gradient(217deg, rgb(255 203 126), rgb(76 68 56 / 78%) 70.71%);
+        }
+
+        #contenedor {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            margin-top: -130px;
+
+        }
+
+        #reinicio {
+            display: flex;
+            border: 2px solid black;
+            height: 44px;
+            width: 85px;
+            font-size: 56px px;
+            border-radius: 41%;
+            background-color: #2d2c2c;
+            padding: 10px;
+            font-family: fantasy;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #reset{
+            color: whitesmoke;
+            font-size: 16px;
+            /*
+            -webkit-text-stroke:
+            Propiedad que no hemos visto pero sirve para dar borde al texto
+            Conozco que no es compatiblie con todos los navegarodes
+            */
+            -webkit-text-stroke: 1px black;
 }
+        
+
+        #actualizarContadorX {
+            border: 2px solid black;
+            border-radius: 41%;
+            padding: 20px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            background: linear-gradient(217deg, rgb(199 173 146), rgb(94 90 85));
+            font-family: fantasy;
+        }
+
+
+        #actualizarContadorO {
+            border: 2px solid black;
+            border-radius: 41%;
+            padding: 20px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            background: linear-gradient(217deg, rgb(80, 77, 74), rgba(207, 127, 46, 0.78) 70.71%);
+            margin-bottom: 30px;
+            font-family: fantasy;
+        }
+
+        #actualizarTablas {
+            border: 2px solid black;
+            border-radius: 25%;
+            padding: 15px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            background: linear-gradient(217deg, rgb(199 173 146), rgb(94 90 85));
+            font-family: fantasy;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+            margin-left: 90px;
+
+        }
+
+        #turnos {
+            background: linear-gradient(217deg, rgb(80, 77, 74), rgba(207, 127, 46, 0.78) 70.71%);
+            margin-right: 120px;
+            border: 2px solid black;
+            border-radius: 17%;
+            padding: 20px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            font-family: fantasy;
+        }
+
+        #cronometro {
+            background: linear-gradient(217deg, rgb(80, 77, 74), rgba(207, 127, 46, 0.78) 70.71%);
+            margin-right: 120px;
+            border: 2px solid black;
+            border-radius: 17%;
+            padding: 20px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            font-family: fantasy;
+        }
+
+        #nombreYJuego {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #h1 {
+            display: flex;
+            font-size: 35px;
+            font-family: math;
+            text-shadow: black;
+            margin-bottom: 0px;
+            padding: 10px;
+        }
+
+        #tic {
+            color: #443d34;
+        }
+
+        #tac {
+            color: #f4ddaf;
+        }
+
+        #toe {
+            color: #e0a537;
+        }
+       
     </style>
 </head>
+
 <body>
-    <div class="tablero">
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
-        <div class="casilla"></div>
+    <div id="nombreYJuego">
+        <div id="h1">
+            <h1 id="tic">Tic </h1>
+            <h1 id="tac">Tac </h1>
+            <h1 id="toe">Toe </h1>
+        </div>
+        <div id="contenedor">
+            <!-- <div id="cronometro">
+             <p>Tiempo restante :</p>
+            </div> -->
+            <div id="turnos">
+                <p>turno de :</p>
+            </div>
+
+            <div class="tablero">
+                <div class="casilla" onclick="agregarFicha(0)"></div>
+                <div class="casilla" onclick="agregarFicha(1)"></div>
+                <div class="casilla" onclick="agregarFicha(2)"></div>
+                <div class="casilla" onclick="agregarFicha(3)"></div>
+                <div class="casilla" onclick="agregarFicha(4)"></div>
+                <div class="casilla" onclick="agregarFicha(5)"></div>
+                <div class="casilla" onclick="agregarFicha(6)"></div>
+                <div class="casilla" onclick="agregarFicha(7)"></div>
+                <div class="casilla" onclick="agregarFicha(8)"></div>
+            </div>
+            <div id="buttons">
+                <div id="contador">
+                </div>
+                <div id="actualizarContadorX">
+                    <p>Ganadas X:</p>
+                </div>
+                <div id="actualizarContadorO">
+                    <p>Ganadas O:</p>
+                </div>
+                <div id="actualizarTablas">
+                    <p>Tablas:</p>
+                </div>
+                <div id="reiniciar">
+                    <button id="reinicio" onclick="reiniciarTablero()"><p id="reset">REINICIAR</p></button>
+                </div>
+            </div>
+        </div>
     </div>
-    
 </body>
-<script src="tickTackToe.js"></script>
+<script src="tictactoe.js"></script>
+
 </html>
