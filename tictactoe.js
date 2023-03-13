@@ -1,5 +1,5 @@
 
-let contadorTablas = 0;
+
 let win = false;/*    -> (win) cambiará de valor cuando se compruebe que un jugador ha ganado*/
 //Declaro los array en los que empujaré las combinaciones de cada ususario
 let combinacionX = [], combinacionO = [],
@@ -9,8 +9,9 @@ let combinacionX = [], combinacionO = [],
                        de victorias */
     , contadorX = 0,
     contadorO = 0,/*     ->(contador X/O) Se usarán para sumar uno al valor del contador de victorias de cada usuario */
-    estaPintada = true/* ->(estaPintada) Cambiara de valor cuando una casilla del tablero no esté pintada(usada en 
-                            función"casillasLlenas")*/;
+    estaPintada = true,/* ->(estaPintada) Cambiara de valor cuando una casilla del tablero no esté pintada(usada en 
+                            función"casillasLlenas")*/
+    contadorTablas = 0; /* ->(contadorTablas) Actualiza el valor del contador de tablas*/
 
 
 
@@ -41,7 +42,15 @@ let combinacionesGanadoras = [
 
 
 
-//FUNCION PARA AGREGAR FICHA
+/**
+ * FUNCION PARA AGREGAR FICHA
+ *
+ * @param (numero) -> contiene el umero de una casilla del tablero
+ * @returns        ->  no
+ * 
+ */
+
+
 function agregarFicha(numero) {
     //Creo el div a partir de las casillas de mi html
     div = document.getElementsByClassName('casilla')[numero];
@@ -73,10 +82,10 @@ function agregarFicha(numero) {
             //casilla
             //COMPROBACIÓN GANAN LAS "X"
             hayGanadorX();
-            
-        } 
-         casillasLlenas();
-        
+
+        }
+        casillasLlenas();
+
     } else {
         //El mismo procedimiento anterior pero con las "O"
         document.getElementById("turnos");
@@ -91,7 +100,7 @@ function agregarFicha(numero) {
         if (combinacionO.length >= 3) {
             //COMPROBACIÓN GANAN LAS "O"
             hayGanadorO()
-        }  
+        }
         casillasLlenas();
     }
 
@@ -99,13 +108,19 @@ function agregarFicha(numero) {
 
 
 
-//FUNCIÓN QUE COMPRUEBA LAS COMBINACIONES DE "X"
+/** 
+ * FUNCIÓN QUE COMPRUEBA LAS COMBINACIONES DE "X"
+ *
+ * @param     -> no
+ * @returns   -> no
+ * 
+ */
 function hayGanadorX() {
-   win=false;
-   let i = 0;/*              -> (i) recoorerá de uno en uno los arrays de las combinacionesGanadoras */
+    win = false;
+    let i = 0;/*              -> (i) recoorerá de uno en uno los arrays de las combinacionesGanadoras */
 
-        //Mensaje de aviso para asegurarnos que la función se está ejecutando
-        console.log("Entro en funcion HayGanador");
+    //Mensaje de aviso para asegurarnos que la función se está ejecutando
+    console.log("Entro en funcion HayGanador");
     do {
         const combinacion = combinacionesGanadoras[i];/*   -> (combinaacion) la constante combinación toma el valor de cada numero que
                                                                   contiene cada iteración de los arrays de "combinacionesGanadoras"*/
@@ -147,18 +162,24 @@ function hayGanadorX() {
         actualizarContador();
 
     }
-    
+
 
 }
 
 
 
-
+/**
+ * FUNCIÓN QUE COMPRUEBA LAS COMBINACIONES DE "O"
+ *
+ * @param     -> no
+ * @returns   -> no
+ * 
+ */
 function hayGanadorO() {
-    win=false;
+    win = false;
     let i = 0;/*              -> (i) recorrerá de uno en uno los arrays de las combinacionesGanadoras */
 
-        console.log("Entro en funcion HayGanador");
+    console.log("Entro en funcion HayGanador");
     do {
         const combinacion = combinacionesGanadoras[i];/*   -> (combinaacion) la constante combinación toma el valor de cada numero que
                                                                contiene cada iteración de los arrays de "combinacionesGanadoras"*/
@@ -181,19 +202,25 @@ function hayGanadorO() {
         ganador = "O";
         actualizarContador();
     }
-   
+
     console.log(win);
     console.log("i = " + i);
     console.log(combinacionesGanadoras);
 
 }
 
-//FUNCION QUE REINICIA EL TABLERO
+/**
+* FUNCION QUE REINICIA EL TABLERO
+*
+* @param     -> no
+* @returns   -> no
+* 
+*/
 function reiniciarTablero() {
     //Recorro con un for todas las casillas del tablero
     for (let i = 0; i < casillas.length; i++) {
         //Iserto en cada casilla texto vacio, es decir, quito las "X" y las "O"
-        casillas[i].innerHTML = "";
+        casillas[i].textContent = "";
         //Quito a cada casilla el atributo de estilo que se las inserta con cada click
         casillas[i].removeAttribute("style");
         //Quito a cada casilla el atributo del evento "onclick"
@@ -208,9 +235,13 @@ function reiniciarTablero() {
 }
 
 
-
-
-//FUNCION QUE ACTUALIZA LOS CONTADORES DE VICTORIAS
+/**
+* FUNCION QUE ACTUALIZA LOS CONTADORES DE VICTORIAS
+*
+* @param     -> no
+* @returns   -> no
+* 
+*/
 function actualizarContador() {
     /*La variable ganador ha tomado forma en funcion del ususario ganador, ahora voy a comprobar quien ha sido y en funcion de eso actualizaré
     un marcador u otro*/
@@ -234,8 +265,14 @@ function actualizarContador() {
     }
 }
 
-//FUNCION QUE COMPRUEBA QUE TODAS LAS CASILLAS ESTAN LLENAS Y SI NO HAY NINGGUN GANADOR
-//DECLARA LA PARTIDA COMO EMPATE
+/**
+* FUNCION QUE COMPRUEBA QUE TODAS LAS CASILLAS ESTAN LLENAS Y SI NO HAY NINGGUN GANADOR
+* DECLARA LA PARTIDA COMO EMPATE
+*
+* @param     -> no
+* @returns   -> no
+* 
+*/
 function casillasLlenas() {
     //Dejo los console.log de pruebas para que veas mi lógica de comprobación
     // console.log("Entro en casillasPintadas");
@@ -244,30 +281,39 @@ function casillasLlenas() {
         // console.log("entro en el for de casillasPintadas");
         // console.log("mi inner es :" + casillas[i].innerHTML);
         //Si la casilla de [i] no tiene contenido, el booleano "estaPintada" se convierte a false
-        if (casillas[k].innerHTML == "") {
+        if (casillas[k].textContent == "") {
             // console.log("entro en el if de casillasPintadas");
             estaPintada = false;
             // console.log(estaPintada)
-        }else{
-            estaPintada=true; 
+        } else {
+            estaPintada = true;
         }
-       
+
         //Cuando el booleano "estaPintada" no se convierta a false, significaría que todas las casillas están pintadas
     }
     //Si todas las casillas están pintadas y el booleano "win" es false , la partida estaría empatada.
     //Pinto un alert de empate y actualizo el marcador de tablas
+    console.log(win);
     if (estaPintada && !win) {
         alert("Empate!");
         actualizarTablas();
-        
+
     }
 }
+
+/**
+ * FUNCIÓN QUE ACTUALIZA EL CONTADOR DE TABLAS
+ *
+ * @param     -> no
+ * @returns   -> no
+ * 
+ */
 
 function actualizarTablas() {
     // Actualiza el valor del contador de tablas
     contadorTablas++;
     // Actualiza el contador de tablas en el navegador
-    document.getElementById("actualizarTablas").innerHTML = ("Tablas: " + contadorTablas);    
+    document.getElementById("actualizarTablas").innerHTML = ("Tablas: " + contadorTablas);
 }
 
 
